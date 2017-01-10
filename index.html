@@ -140,6 +140,96 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-cssSelectorPriority" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/01/10/cssSelectorPriority/">cssSelectorPriority</a>
+    </h1>
+  
+
+        
+        <a href="/2017/01/10/cssSelectorPriority/" class="archive-article-date">
+  	<time datetime="2017-01-10T06:52:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="选择器特殊性"><a href="#选择器特殊性" class="headerlink" title="选择器特殊性"></a>选择器特殊性</h1><ul>
+<li>內联样式，1000</li>
+<li>给定ID属性值，加0100</li>
+<li>给定类属性值，属性选择或者伪类，加0010</li>
+<li>给定元素或者伪元素，加0001</li>
+<li>结合符和通用匹配符特殊性为0000</li>
+<li>重要声明!important标志放在声明的最后面，重要声明与非重要声明发生冲突时永远是重要声明胜出</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span><span class="undefined"></span></div><div class="line">        #test&#123;</div><div class="line">            color: red;</div><div class="line">        &#125;</div><div class="line">        p[id="test"]&#123;</div><div class="line">            color: green;</div><div class="line">        &#125;</div><div class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">"test"</span>&gt;</span></div><div class="line">        id选择器与id属性选择器优先级不同</div><div class="line">        #test 0100</div><div class="line">        p[id="test"] 0011</div><div class="line">        最终呈现为红色</div><div class="line">    <span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>#继承</p>
+<ul>
+<li>有些属性不能继承，外边距，内边距，背景和边框等</li>
+<li>继承的值无特殊性，tips：0000与没有特殊性是有差别的，因此当继承值与*比较时，通用匹配符胜出</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span><span class="undefined"></span></div><div class="line">        p&#123;</div><div class="line">            color: black;</div><div class="line">        &#125;</div><div class="line">        *&#123;</div><div class="line">            color: grey;</div><div class="line">        &#125;</div><div class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>black <span class="tag">&lt;<span class="name">em</span>&gt;</span>grey<span class="tag">&lt;/<span class="name">em</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>#层叠</p>
+<ul>
+<li>找出元素所有相关规则</li>
+<li>按显示权重排序<ul>
+<li>读者!important声明</li>
+<li>作者！important声明</li>
+<li>作者正常声明</li>
+<li>读者正常声明</li>
+<li>代理默认样式</li>
+</ul>
+</li>
+<li>按照特殊性排序，如果多个声明的权重相同，则按照特殊性排序</li>
+<li>按照出现顺序排序，一般认为导入样式表出现在前面，主样式表出现在后面</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">css3</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/01/10/cssSelectorPriority/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-css3-selector" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -160,15 +250,15 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h1><p>总结一下css选择器啦～写完了发现有点长😳，下面是目录<br><a href="#1-Element-Selectors">1.元素选择器 Element Selectors</a><br><a href="#2-Relationship-Selectors">2.关系选择符 Relationship Selectors</a><br><a href="#3-Attribute-Selectors">3.属性选择符 Attribute Selectors</a><br><a href="#4-Pseudo-Classes-Selectors">4.伪类选择符 Pseudo-Classes Selectors</a><br><a href="#5-Pseudo-Element-Selectors">5.伪元素选择符 Pseudo-Element Selectors</a></p>
+        <h1 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h1><p>总结一下css选择器啦～有点长😳，下面是目录<br><a href="#1-Element-Selectors">1.元素选择器 Element Selectors</a><br><a href="#2-Relationship-Selectors">2.关系选择符 Relationship Selectors</a><br><a href="#3-Attribute-Selectors">3.属性选择符 Attribute Selectors</a><br><a href="#4-Pseudo-Classes-Selectors">4.伪类选择符 Pseudo-Classes Selectors</a><br><a href="#5-Pseudo-Element-Selectors">5.伪元素选择符 Pseudo-Element Selectors</a></p>
 <h1 id="1-Element-Selectors"><a href="#1-Element-Selectors" class="headerlink" title="1.Element Selectors"></a>1.Element Selectors</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">1. 通用选择符 *&#123;&#125;</div><div class="line">2. 类型选择符 E&#123;&#125;</div><div class="line">3. id选择符 E#id&#123;&#125;</div><div class="line">4. class选择符 E.class&#123;&#125;</div></pre></td></tr></table></figure>
-<h1 id="2-Relationship-Selectors"><a href="#2-Relationship-Selectors" class="headerlink" title="2.Relationship Selectors"></a>2.Relationship Selectors</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">1. 包含选择符 E F</div><div class="line">2. 子元素选择符 E &gt; F</div><div class="line">3. 相邻元素选择符 E + F //符合条件的相邻兄弟元素</div><div class="line">4. 兄弟选择符 E ~ F //命中所有符合条件的兄弟元素，而不仅仅是相邻元素，css3中出现的</div></pre></td></tr></table></figure>
+<h1 id="2-Relationship-Selectors"><a href="#2-Relationship-Selectors" class="headerlink" title="2.Relationship Selectors"></a>2.Relationship Selectors</h1><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">1. 包含选择符 E F</div><div class="line">2. 子元素选择符 E &gt; F</div><div class="line">3. 相邻元素选择符 E + F //符合条件的相邻兄弟元素，注意两个元素之间的文本内容不会影响兄弟选择符起作用的，中间的文本不包含在兄弟元素中，而是父元素的一部分</div><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span><span class="undefined"></span></div><div class="line">        p + p&#123;</div><div class="line">            color: red;</div><div class="line">        &#125;</div><div class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>1<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">    中间的文本</div><div class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>我还是会显示成红色<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div><div class="line">4. 兄弟选择符 E ~ F //命中所有符合条件的兄弟元素，而不仅仅是相邻元素，css3中出现的</div></pre></td></tr></table></figure>
 <h1 id="3-Attribute-Selectors"><a href="#3-Attribute-Selectors" class="headerlink" title="3.Attribute Selectors"></a>3.Attribute Selectors</h1><h2 id="1-选择具有attr属性的元素"><a href="#1-选择具有attr属性的元素" class="headerlink" title="1.选择具有attr属性的元素"></a>1.选择具有attr属性的元素</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">E[attr]&#123;&#125;</div></pre></td></tr></table></figure>
 <h2 id="2-具有attr属性，且值为val的元素"><a href="#2-具有attr属性，且值为val的元素" class="headerlink" title="2.具有attr属性，且值为val的元素"></a>2.具有attr属性，且值为val的元素</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">E[attr="val"]</div><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span><span class="undefined"></span></div><div class="line">        p[class="a b"]</div><div class="line">        p[class="a"]&#123;</div><div class="line">            /*不能匹配class="a b"的元素，=匹配要求完全相等*/</div><div class="line">        &#125;</div><div class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"a b"</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
 <h2 id="3-具有attr属性，且属性值为空格分割的单词列表，列表中包含val"><a href="#3-具有attr属性，且属性值为空格分割的单词列表，列表中包含val" class="headerlink" title="3.具有attr属性，且属性值为空格分割的单词列表，列表中包含val"></a>3.具有attr属性，且属性值为空格分割的单词列表，列表中包含val</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">p[class="val"]</div><div class="line"><span class="comment">&lt;!-- 示例 --&gt;</span></div><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span><span class="undefined"></span></div><div class="line">        p[class~="a"]</div><div class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"a b"</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"a"</span>&gt;</span>我也可以被匹配😄<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
 <h2 id="4-具有attr属性，并且以val开头-结尾，包含-css3新增属性"><a href="#4-具有attr属性，并且以val开头-结尾，包含-css3新增属性" class="headerlink" title="4.具有attr属性，并且以val开头,结尾，包含,css3新增属性"></a>4.具有attr属性，并且以val开头,结尾，包含,css3新增属性</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">p[class^=&quot;val&quot;]</div><div class="line">p[class$=&quot;val&quot;]</div><div class="line">p[class*=&quot;val&quot;]</div></pre></td></tr></table></figure>
 <h2 id="5-选择属性值为val，以及以val-开头的元素"><a href="#5-选择属性值为val，以及以val-开头的元素" class="headerlink" title="5.选择属性值为val，以及以val-开头的元素"></a>5.选择属性值为val，以及以val-开头的元素</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">p[class|=&quot;val&quot;]</div></pre></td></tr></table></figure>
-<h1 id="4-Pseudo-Classes-Selectors"><a href="#4-Pseudo-Classes-Selectors" class="headerlink" title="4.Pseudo-Classes Selectors"></a>4.Pseudo-Classes Selectors</h1><h2 id="1-点击相关"><a href="#1-点击相关" class="headerlink" title="1.点击相关"></a>1.点击相关</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!--链接a未被访问之前的样式--&gt;</span></div><div class="line">E:link</div><div class="line"><span class="comment">&lt;!--已经被访问过--&gt;</span></div><div class="line">E:visited</div><div class="line"><span class="comment">&lt;!--鼠标悬停样式--&gt;</span></div><div class="line">E:hover</div><div class="line"><span class="comment">&lt;!--用户激活，发生在鼠标点击和鼠标释放之间的事件，在hover后发生--&gt;</span></div><div class="line">E:active</div><div class="line"><span class="comment">&lt;!--称为输入焦点时的样式，对应事件onfocus--&gt;</span></div><div class="line">E:focus</div><div class="line"></div><div class="line"><span class="comment">&lt;!--超链接状态顺序，love+hate--&gt;</span></div><div class="line">a:link&#123;&#125;</div><div class="line">a:visited&#123;&#125;</div><div class="line">a:hover&#123;&#125;</div><div class="line">a:active&#123;&#125;</div></pre></td></tr></table></figure>
+<h1 id="4-Pseudo-Classes-Selectors"><a href="#4-Pseudo-Classes-Selectors" class="headerlink" title="4.Pseudo-Classes Selectors"></a>4.Pseudo-Classes Selectors</h1><h2 id="1-链接伪类"><a href="#1-链接伪类" class="headerlink" title="1.链接伪类"></a>1.链接伪类</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!--链接a未被访问之前的样式--&gt;</span></div><div class="line">E:link</div><div class="line"><span class="comment">&lt;!--已经被访问过--&gt;</span></div><div class="line">E:visited</div><div class="line"><span class="comment">&lt;!--鼠标悬停样式--&gt;</span></div><div class="line">E:hover</div><div class="line"><span class="comment">&lt;!--用户激活，发生在鼠标点击和鼠标释放之间的事件，在hover后发生--&gt;</span></div><div class="line">E:active</div><div class="line"><span class="comment">&lt;!--称为输入焦点时的样式，对应事件onfocus--&gt;</span></div><div class="line">E:focus</div><div class="line"></div><div class="line"><span class="comment">&lt;!--超链接状态顺序，love+hate--&gt;</span></div><div class="line">a:link&#123;&#125;</div><div class="line">a:visited&#123;&#125;</div><div class="line">a:hover&#123;&#125;</div><div class="line">a:active&#123;&#125;</div></pre></td></tr></table></figure>
 <h2 id="2-匹配特定语言"><a href="#2-匹配特定语言" class="headerlink" title="2.匹配特定语言"></a>2.匹配特定语言</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">E</span><span class="selector-pseudo">:lang(fr)</span></div><div class="line">&lt;!<span class="selector-tag">--</span>示例，匹配语言为<span class="selector-tag">english</span>的<span class="selector-tag">p</span>元素<span class="selector-tag">--</span>&gt;</div><div class="line"><span class="selector-tag">p</span><span class="selector-pseudo">:lang(english)</span>&#123;&#125;</div></pre></td></tr></table></figure>
 <h2 id="3-not选择符"><a href="#3-not选择符" class="headerlink" title="3.not选择符"></a>3.not选择符</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">E:not(s)</div><div class="line">&lt;!--示例，匹配非最后一个li元素--&gt;</div><div class="line">li:not(:last-child)&#123;</div><div class="line">border:1px solid black</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h2 id="4-匹配根元素，html中根元素永远是html"><a href="#4-匹配根元素，html中根元素永远是html" class="headerlink" title="4.匹配根元素，html中根元素永远是html"></a>4.匹配根元素，html中根元素永远是html</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">E:root</div></pre></td></tr></table></figure>
@@ -194,10 +284,10 @@
 <li>伪元素插入的位置，成为关联目标元素的字元素，放置在这个元素内容的前面或者后面</li>
 <li>插入元素不是真正的元素，不能用js操作</li>
 <li>插入内容<ul>
-<li>文本 content:’’</li>
-<li>元素属性 content:attr()</li>
+<li>文本 content: ‘’</li>
+<li>元素属性 content: attr()</li>
 <li>图片 content: url()</li>
-<li>技术器 counter()</li>
+<li>技术器 content: counter()</li>
 </ul>
 </li>
 <li>应用<ul>
