@@ -6,17 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="//happyeverday.github.io">
-  <title>Archives | 行舟的博客</title>
+  <title>C++函数lower_bound和upper_bound应用 | 行舟的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="北京邮电大学15级">
-<meta property="og:type" content="website">
-<meta property="og:title" content="行舟的博客">
-<meta property="og:url" content="//happyeverday.github.io/archives/index.html">
+  <meta name="description" content="介绍ForwardIter lower_bound(ForwardIter first, ForwardIter last,const _Tp&amp;amp; val)算法返回一个非递减序列[first, last)中的第一个大于等于值val的位置。
+ForwardIter upper_bound(ForwardIter first, ForwardIter last, const _Tp&amp;amp; v">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++函数lower_bound和upper_bound应用">
+<meta property="og:url" content="//happyeverday.github.io/2017/01/12/lower-bound/index.html">
 <meta property="og:site_name" content="行舟的博客">
-<meta property="og:description" content="北京邮电大学15级">
+<meta property="og:description" content="介绍ForwardIter lower_bound(ForwardIter first, ForwardIter last,const _Tp&amp;amp; val)算法返回一个非递减序列[first, last)中的第一个大于等于值val的位置。
+ForwardIter upper_bound(ForwardIter first, ForwardIter last, const _Tp&amp;amp; v">
+<meta property="og:updated_time" content="2017-01-12T09:07:43.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="行舟的博客">
-<meta name="twitter:description" content="北京邮电大学15级">
+<meta name="twitter:title" content="C++函数lower_bound和upper_bound应用">
+<meta name="twitter:description" content="介绍ForwardIter lower_bound(ForwardIter first, ForwardIter last,const _Tp&amp;amp; val)算法返回一个非递减序列[first, last)中的第一个大于等于值val的位置。
+ForwardIter upper_bound(ForwardIter first, ForwardIter last, const _Tp&amp;amp; v">
   
     <link rel="alternative" href="/atom.xml" title="行舟的博客" type="application/atom+xml">
   
@@ -138,36 +142,48 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-lower-bound" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/01/12/lower-bound/" class="archive-article-date">
-  	<time datetime="2017-01-12T07:09:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-12</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/01/12/lower-bound/">C++函数lower_bound和upper_bound应用</a>
+    <h1 class="article-title" itemprop="name">
+      C++函数lower_bound和upper_bound应用
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2017/01/12/lower-bound/" class="archive-article-date">
+  	<time datetime="2017-01-12T07:09:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>ForwardIter lower_bound(ForwardIter first, ForwardIter last,const _Tp&amp; val)算法返回一个非递减序列[first, last)中的第一个大于等于值val的位置。</p>
+<p>ForwardIter upper_bound(ForwardIter first, ForwardIter last, const _Tp&amp; val)算法返回一个非递减序列[first, last)中第一个大于val的位置。</p>
+<h2 id="lower-bound源码"><a href="#lower-bound源码" class="headerlink" title="lower_bound源码"></a>lower_bound源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">int lower_bound(int *array, int size, int key)</div><div class="line">&#123;</div><div class="line">    int first = 0, middle;</div><div class="line">    int half, len;</div><div class="line">    len = size;</div><div class="line"></div><div class="line">    while(len &gt; 0) &#123;</div><div class="line">        half = len &gt;&gt; 1;</div><div class="line">        middle = first + half;</div><div class="line">        if(array[middle] &lt; key) &#123;</div><div class="line">            first = middle + 1;</div><div class="line">            len = len-half-1;       //在右边子序列中查找</div><div class="line">        &#125;</div><div class="line">        else</div><div class="line">            len = half;            //在左边子序列（包含middle）中查找</div><div class="line">    &#125;</div><div class="line">    return first;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="upper-bound源码"><a href="#upper-bound源码" class="headerlink" title="upper_bound源码"></a>upper_bound源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">int upper_bound(int *array, int size, int key)&#123;</div><div class="line">    int first = 0, middle;</div><div class="line">    int half, len = size;</div><div class="line">    while(len &gt; 0)&#123;</div><div class="line">        half = len &gt;&gt; 1;</div><div class="line">        middle = first + half;</div><div class="line">        if(array[middle] &gt; key)&#123;</div><div class="line">            len = half;</div><div class="line">        &#125;</div><div class="line">        else&#123;//在右半边寻找</div><div class="line">            first = middle + 1;</div><div class="line">            len = len - half - 1;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return first;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h1><h2 id="leetcode-315-Count-of-Smaller-Numbers-After-Self"><a href="#leetcode-315-Count-of-Smaller-Numbers-After-Self" class="headerlink" title="leetcode 315. Count of Smaller Numbers After Self"></a>leetcode 315. Count of Smaller Numbers After Self</h2><p>You are given an integer array nums and you have to return a new counts array. The counts array has the property where counts[i] is the number of smaller elements to the right of nums[i].</p>
+<p>Example:</p>
+<p>Given nums = [5, 2, 6, 1]</p>
+<p>To the right of 5 there are 2 smaller elements (2 and 1).<br>To the right of 2 there is only 1 smaller element (1).<br>To the right of 6 there is 1 smaller element (1).<br>To the right of 1 there is 0 smaller element.<br>Return the array [2, 1, 1, 0].<br>解释：对于一个给定的数组，找到每个位置右侧小于自身的元素的个数<br>最朴素的想法:复杂度o(n^2)，遍历数组，对于每一个位置pos，遍历pos+1到最后一个元素，记录小于nums[pos]元素的数量，但是此时没有记录已比较过的元素之间的关系<br>改进：复杂度n*log(n)，从后向前便利数组，同时维持一个生序的子序列，对于每一个位置pos，采用二分搜索返回小于nums[pos]的元素<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; countSmaller(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums) &#123;</div><div class="line">        <span class="keyword">int</span> len = nums.size();</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; tmp, res(len, <span class="number">0</span>);</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = len - <span class="number">1</span>;i &gt;= <span class="number">0</span>;i--)&#123;</div><div class="line">            <span class="keyword">auto</span> pos = lower_bound(tmp.begin(), tmp.end(), nums[i]);<span class="comment">//找到i应该插入的位置</span></div><div class="line">            res[i] = pos - tmp.begin();<span class="comment">//则前面有pos-begin个元素小于nums[i]</span></div><div class="line">            tmp.insert(pos, nums[i]);<span class="comment">//插入当前元素</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> res;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="327-Count-of-Range-Sum"><a href="#327-Count-of-Range-Sum" class="headerlink" title="327. Count of Range Sum"></a>327. Count of Range Sum</h2><p>Given an integer array nums, return the number of range sums that lie in [lower, upper] inclusive.<br>Range sum S(i, j) is defined as the sum of the elements in nums between indices i and j (i ≤ j), inclusive.</p>
+<p>Note:<br>A naive algorithm of O(n2) is trivial. You MUST do better than that.</p>
+<p>Example:<br>Given nums = [-2, 5, -1], lower = -2, upper = 2,<br>Return 3.<br>The three ranges are : [0, 0], [2, 2], [0, 2] and their respective sums are: -2, -1, 2.<br>解释：对于一个给定的数组，求满足[a,b]区间内元素和落在lower, supper之间，求这样的区间个数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">class Solution &#123;</div><div class="line">public:</div><div class="line">    int countRangeSum(vector&lt;int&gt;&amp; nums, int lower, int upper) &#123;</div><div class="line">        multiset&lt;long long&gt; pSum;</div><div class="line">        int res = 0,  i;</div><div class="line">        long long left, right, sum=0;</div><div class="line">        pSum.insert(0);// 确定当sum等于supper或者lower时，有值</div><div class="line">        for(i=0; i&lt;nums.size(); ++i)</div><div class="line">        &#123;</div><div class="line">            sum +=nums[i];</div><div class="line">            res += distance(pSum.lower_bound(sum-upper), pSum.upper_bound(sum-lower));//以sum为结尾的区间满足条件的个数</div><div class="line">            pSum.insert(sum);</div><div class="line">        &#125;</div><div class="line">        return res;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<h1 id="二叉搜索树解决问题"><a href="#二叉搜索树解决问题" class="headerlink" title="二叉搜索树解决问题"></a>二叉搜索树解决问题</h1><h2 id="327-Count-of-Range-Sum-1"><a href="#327-Count-of-Range-Sum-1" class="headerlink" title="327. Count of Range Sum"></a>327. Count of Range Sum</h2><p>Given an integer array nums, return the number of range sums that lie in [lower, upper] inclusive.<br>Range sum S(i, j) is defined as the sum of the elements in nums between indices i and j (i ≤ j), inclusive.</p>
+<p>Note:<br>A naive algorithm of O(n2) is trivial. You MUST do better than that.</p>
+<p>Example:<br>Given nums = [-2, 5, -1], lower = -2, upper = 2,<br>Return 3.<br>The three ranges are : [0, 0], [2, 2], [0, 2] and their respective sums are: -2, -1, 2.<br>解释：对于一个给定的数组，求满足[a,b]区间内元素和落在lower, supper之间，求这样的区间个数<br>最朴素的想法：复杂度o(n^2),对于位置pos,分别计算从0-pos起始得到的和是否落在lower到upper区间内<br>改进:记录从0到pos的和升序数组，当计算以pos+1为结尾的部分数组构成落在lower到upper区间内的和个数时，只需要将当前0到pos+1的元素和减去从0到位置j的元素和，要求满足剩余部分j+1到pos+1的元素和落在lower道upper区间内，所以要求从0-j的元素和在sum - lower到sum-upper区间内，生序和数组遍历时可采用二叉搜索。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div></pre></td><td class="code"><pre><div class="line">class Solution &#123;</div><div class="line">private:</div><div class="line">    class BSTNode&#123; // Binary search tree implementation</div><div class="line">    public:    </div><div class="line">        long long val;</div><div class="line">        int cnt; // how many nodes with value of &quot;val&apos;</div><div class="line">        int lCnt; // how many nodes on its left subtree</div><div class="line">        BSTNode *left;</div><div class="line">        BSTNode *right;</div><div class="line">        BSTNode(long long x)</div><div class="line">        &#123;</div><div class="line">            val = x;</div><div class="line">            cnt = 1;</div><div class="line">            lCnt = 0;</div><div class="line">            left = right = nullptr;</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line">    </div><div class="line">    int getBound(BSTNode *root, long long x, bool includeSelf)</div><div class="line">    &#123; // get the index of the last node that satisfy val&lt;x (includeSelf=false) or val&lt;=x (includeSelf = true)</div><div class="line">        if(!root) return 0;</div><div class="line">        if(root-&gt;val == x) return  root-&gt;lCnt + (includeSelf?root-&gt;cnt:0);</div><div class="line">        else if(root-&gt;val &gt; x) return getBound(root-&gt;left, x, includeSelf);</div><div class="line">        else return root-&gt;cnt + root-&gt;lCnt + getBound(root-&gt;right, x, includeSelf);</div><div class="line">    &#125;</div><div class="line">    void insert(BSTNode*&amp; root, long long x)</div><div class="line">    &#123; // insert a node to the tree</div><div class="line">        if(!root) root = new BSTNode(x);</div><div class="line">        else if(root-&gt;val == x) (root-&gt;cnt)++;</div><div class="line">        else if(root-&gt;val &lt; x) </div><div class="line">            insert(root-&gt;right,x);</div><div class="line">        else&#123;</div><div class="line">            ++(root-&gt;lCnt);</div><div class="line">            insert(root-&gt;left,x);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    void deleteTree(BSTNode*root)</div><div class="line">    &#123; //destroy the tree</div><div class="line">        if(!root) return;</div><div class="line">        deleteTree(root-&gt;left);</div><div class="line">        deleteTree(root-&gt;right);</div><div class="line">        delete root;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    </div><div class="line">public:</div><div class="line">    int countRangeSum(vector&lt;int&gt;&amp; nums, int lower, int upper) &#123; // same idea as the multiset  version</div><div class="line">        BSTNode *root= new BSTNode(0);</div><div class="line">        int res = 0,  i; </div><div class="line">        long long left, right, sum=0;</div><div class="line">        for(i=0; i&lt;nums.size(); ++i)</div><div class="line">        &#123;</div><div class="line">            sum +=nums[i];</div><div class="line">            res += getBound(root, sum-lower, true) - getBound(root, sum-upper, false);</div><div class="line">            insert(root, sum);</div><div class="line">        &#125;</div><div class="line">        deleteTree(root);</div><div class="line">        return res;</div><div class="line">     &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -179,133 +195,88 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://happyeverday.github.io/2017/01/12/lower-bound/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/01/10/cssSelectorPriority/" class="archive-article-date">
-  	<time datetime="2017-01-10T06:52:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-10</time>
-</a>
-        </div>
-    	 
+<nav id="article-nav">
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/01/10/cssSelectorPriority/">cssSelectorPriority</a>
-    </h1>
+  
+    <a href="/2017/01/10/cssSelectorPriority/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">cssSelectorPriority</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+  
+    <div class="duoshuo"></div>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">css3</a>
-        		</li>
-      		
-		</ul>
-	</div>
 
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/01/09/css3-selector/" class="archive-article-date">
-  	<time datetime="2017-01-09T05:10:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/01/09/css3-selector/">css3选择器总结</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">css3</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/01/06/start/" class="archive-article-date">
-  	<time datetime="2017-01-06T06:20:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-06</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/01/06/start/">2017,启航</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -328,8 +299,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
