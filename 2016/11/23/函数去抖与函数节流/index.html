@@ -6,42 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="//happyeverday.github.io">
-  <title>cssSelectorPriority | 行舟的博客</title>
+  <title>函数去抖与函数节流 | 行舟的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="选择器特殊性
-內联样式，1000
-给定ID属性值，加0100
-给定类属性值，属性选择或者伪类，加0010
-给定元素或者伪元素，加0001
-结合符和通用匹配符特殊性为0000
-重要声明!important标志放在声明的最后面，重要声明与非重要声明发生冲突时永远是重要声明胜出
-
-12345678910111213141516171819202122&amp;lt;!DOCTYPE html&amp;gt;&amp;lt;ht">
+  <meta name="description" content="#1 函数去抖应用场景：联想词推荐方法：设置定时器，当限定时间内，事件重复触发时，清零计时器，当事件不再触发，执行函数
+123456function debounce(method, delay)&amp;#123;    if(method.tId)&amp;#123;        clearTimeOut(method.tId)    &amp;#125;    method.tId = setTimeOut(me">
 <meta property="og:type" content="article">
-<meta property="og:title" content="cssSelectorPriority">
-<meta property="og:url" content="//happyeverday.github.io/2017/01/10/cssSelectorPriority/index.html">
+<meta property="og:title" content="函数去抖与函数节流">
+<meta property="og:url" content="//happyeverday.github.io/2016/11/23/函数去抖与函数节流/index.html">
 <meta property="og:site_name" content="行舟的博客">
-<meta property="og:description" content="选择器特殊性
-內联样式，1000
-给定ID属性值，加0100
-给定类属性值，属性选择或者伪类，加0010
-给定元素或者伪元素，加0001
-结合符和通用匹配符特殊性为0000
-重要声明!important标志放在声明的最后面，重要声明与非重要声明发生冲突时永远是重要声明胜出
-
-12345678910111213141516171819202122&amp;lt;!DOCTYPE html&amp;gt;&amp;lt;ht">
-<meta property="og:updated_time" content="2017-01-10T12:20:52.000Z">
+<meta property="og:description" content="#1 函数去抖应用场景：联想词推荐方法：设置定时器，当限定时间内，事件重复触发时，清零计时器，当事件不再触发，执行函数
+123456function debounce(method, delay)&amp;#123;    if(method.tId)&amp;#123;        clearTimeOut(method.tId)    &amp;#125;    method.tId = setTimeOut(me">
+<meta property="og:updated_time" content="2017-02-23T07:25:40.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="cssSelectorPriority">
-<meta name="twitter:description" content="选择器特殊性
-內联样式，1000
-给定ID属性值，加0100
-给定类属性值，属性选择或者伪类，加0010
-给定元素或者伪元素，加0001
-结合符和通用匹配符特殊性为0000
-重要声明!important标志放在声明的最后面，重要声明与非重要声明发生冲突时永远是重要声明胜出
-
-12345678910111213141516171819202122&amp;lt;!DOCTYPE html&amp;gt;&amp;lt;ht">
+<meta name="twitter:title" content="函数去抖与函数节流">
+<meta name="twitter:description" content="#1 函数去抖应用场景：联想词推荐方法：设置定时器，当限定时间内，事件重复触发时，清零计时器，当事件不再触发，执行函数
+123456function debounce(method, delay)&amp;#123;    if(method.tId)&amp;#123;        clearTimeOut(method.tId)    &amp;#125;    method.tId = setTimeOut(me">
   
     <link rel="alternative" href="/atom.xml" title="行舟的博客" type="application/atom+xml">
   
@@ -163,55 +142,29 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-cssSelectorPriority" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-函数去抖与函数节流" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      cssSelectorPriority
+      函数去抖与函数节流
     </h1>
   
 
         
-        <a href="/2017/01/10/cssSelectorPriority/" class="archive-article-date">
-  	<time datetime="2017-01-10T06:52:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-10</time>
+        <a href="/2016/11/23/函数去抖与函数节流/" class="archive-article-date">
+  	<time datetime="2016-11-23T07:08:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-11-23</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="选择器特殊性"><a href="#选择器特殊性" class="headerlink" title="选择器特殊性"></a>选择器特殊性</h1><ul>
-<li>內联样式，1000</li>
-<li>给定ID属性值，加0100</li>
-<li>给定类属性值，属性选择或者伪类，加0010</li>
-<li>给定元素或者伪元素，加0001</li>
-<li>结合符和通用匹配符特殊性为0000</li>
-<li>重要声明!important标志放在声明的最后面，重要声明与非重要声明发生冲突时永远是重要声明胜出</li>
-</ul>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span><span class="css"></span></div><div class="line">        <span class="selector-id">#test</span>&#123;</div><div class="line">            <span class="attribute">color</span>: red;</div><div class="line">        &#125;</div><div class="line">        <span class="selector-tag">p</span><span class="selector-attr">[id="test"]</span>&#123;</div><div class="line">            <span class="attribute">color</span>: green;</div><div class="line">        &#125;</div><div class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">"test"</span>&gt;</span></div><div class="line">        id选择器与id属性选择器优先级不同</div><div class="line">        #test 0100</div><div class="line">        p[id="test"] 0011</div><div class="line">        最终呈现为红色</div><div class="line">    <span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>#继承</p>
-<ul>
-<li>有些属性不能继承，外边距，内边距，背景和边框等</li>
-<li>继承的值无特殊性，tips：0000与没有特殊性是有差别的，因此当继承值与*比较时，通用匹配符胜出</li>
-</ul>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span><span class="css"></span></div><div class="line">        <span class="selector-tag">p</span>&#123;</div><div class="line">            <span class="attribute">color</span>: black;</div><div class="line">        &#125;</div><div class="line">        *&#123;</div><div class="line">            <span class="attribute">color</span>: grey;</div><div class="line">        &#125;</div><div class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>black <span class="tag">&lt;<span class="name">em</span>&gt;</span>grey<span class="tag">&lt;/<span class="name">em</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>#层叠</p>
-<ul>
-<li>找出元素所有相关规则</li>
-<li>按显示权重排序<ul>
-<li>读者!important声明</li>
-<li>作者！important声明</li>
-<li>作者正常声明</li>
-<li>读者正常声明</li>
-<li>代理默认样式</li>
-</ul>
-</li>
-<li>按照特殊性排序，如果多个声明的权重相同，则按照特殊性排序</li>
-<li>按照出现顺序排序，一般认为导入样式表出现在前面，主样式表出现在后面</li>
-</ul>
+        <p>#1 函数去抖<br>应用场景：联想词推荐<br>方法：设置定时器，当限定时间内，事件重复触发时，清零计时器，当事件不再触发，执行函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">function debounce(method, delay)&#123;</div><div class="line">    if(method.tId)&#123;</div><div class="line">        clearTimeOut(method.tId)</div><div class="line">    &#125;</div><div class="line">    method.tId = setTimeOut(method, delay);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>#2 函数节流<br>应用场景：scroll resize事件<br>方法：设定函数执行的最小时间间隔，事件处理函数至少delay时间内调用一次，降低函数调用频率<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">function throttle(method, delay)&#123;</div><div class="line">    let previous = 0, timeout = null;</div><div class="line">    return function()&#123;</div><div class="line">        let now = new Date().getTime(),</div><div class="line">            remain = delay - (now - previous);</div><div class="line">        if(remain &lt;= 0)&#123;</div><div class="line">            if(timeout) clearTimeOut(timeout);//清空计时器</div><div class="line">            timeout = null;</div><div class="line">            previous = now;//更新上次调用时间</div><div class="line">            method()</div><div class="line">        &#125;</div><div class="line">        else if(!timeout)&#123;</div><div class="line">            timeout = setTimeOut(method, remain);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 
       
 
@@ -225,7 +178,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">css3</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
         		</li>
       		
 		</ul>
@@ -281,7 +234,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://happyeverday.github.io/2017/01/10/cssSelectorPriority/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://happyeverday.github.io/2016/11/23/函数去抖与函数节流/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -295,20 +248,15 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/01/12/lower-bound/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/01/06/start/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          C++函数lower_bound和upper_bound应用
+          2017,启航
         
       </div>
     </a>
   
-  
-    <a href="/2017/01/09/css3-selector/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">css3选择器总结</div>
-      <i class="icon-circle-right"></i>
-    </a>
   
 </nav>
 
