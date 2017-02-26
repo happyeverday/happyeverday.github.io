@@ -140,6 +140,79 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-leetcode周末算法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/02/26/leetcode周末算法/">leetcode周末算法</a>
+    </h1>
+  
+
+        
+        <a href="/2017/02/26/leetcode周末算法/" class="archive-article-date">
+  	<time datetime="2017-02-26T04:52:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#523. Continuous Subarray Sum My SubmissionsBack To Contest</p>
+<p>#Difficulty: Medium<br>Given a list of non-negative numbers and a target integer k, write a function to check if the array has a continuous subarray of size at least 2 that sums up to the multiple of k, that is, sums up to n*k where n is also an integer.</p>
+<p>Example 1:<br>Input: [23, 2, 4, 6, 7],  k=6<br>Output: True<br>Explanation: Because [2, 4] is a continuous subarray of size 2 and sums up to 6.<br>Example 2:<br>Input: [23, 2, 6, 4, 7],  k=6<br>Output: True<br>Explanation: Because [23, 2, 6, 4, 7] is an continuous subarray of size 5 and sums up to 42.<br>Note:<br>The length of the array won’t exceed 10,000.<br>You may assume the sum of all the numbers is in the range of a signed 32-bit integer.</p>
+<p>##题目：给定一个数组nums,和一个整数k,求数组中是否存在子串之和能够整除k</p>
+<p>##算法分析：</p>
+<h3 id="利用从0到pos之和取余k的值作为标志，例如-0到2取余k值为3，0到5取余k值也为3，则说明3到5子串之和取余k为0"><a href="#利用从0到pos之和取余k的值作为标志，例如-0到2取余k值为3，0到5取余k值也为3，则说明3到5子串之和取余k为0" class="headerlink" title="利用从0到pos之和取余k的值作为标志，例如:0到2取余k值为3，0到5取余k值也为3，则说明3到5子串之和取余k为0"></a>利用从0到pos之和取余k的值作为标志，例如:0到2取余k值为3，0到5取余k值也为3，则说明3到5子串之和取余k为0</h3><h3 id="此外要将位置0加入子串数组中，因此需要首先将标识为0序列推入下表-1，这样当0～pos取余k为0，（pos-0-1）获取子串中元素个数，遍历才能拿到正确结果"><a href="#此外要将位置0加入子串数组中，因此需要首先将标识为0序列推入下表-1，这样当0～pos取余k为0，（pos-0-1）获取子串中元素个数，遍历才能拿到正确结果" class="headerlink" title="此外要将位置0加入子串数组中，因此需要首先将标识为0序列推入下表-1，这样当0～pos取余k为0，（pos - 0 + 1）获取子串中元素个数，遍历才能拿到正确结果"></a>此外要将位置0加入子串数组中，因此需要首先将标识为0序列推入下表-1，这样当0～pos取余k为0，（pos - 0 + 1）获取子串中元素个数，遍历才能拿到正确结果</h3><p>注意事项：对于参数k为0和负数的处理<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">checkSubarraySum</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> k)</span> </span>&#123;</div><div class="line">        <span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; m;</div><div class="line">        <span class="keyword">int</span> a = <span class="number">0</span>, len = nums.size();</div><div class="line">        <span class="keyword">if</span>(k == <span class="number">0</span>)&#123;</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>;i &lt; len;i++)&#123;</div><div class="line">                <span class="keyword">if</span>(nums[i] == <span class="number">0</span> &amp;&amp; nums[i - <span class="number">1</span>] == <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">        &#125;</div><div class="line">        k = k &gt; <span class="number">0</span> ? k : -k;</div><div class="line">        m[<span class="number">0</span>].push_back(<span class="number">-1</span>);</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; len;i++)&#123;</div><div class="line">            a = (a + nums[i]) % k;</div><div class="line">            m[a].push_back(i);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> i : m)&#123;</div><div class="line">            <span class="keyword">if</span>(i.second.size() &gt;= <span class="number">2</span> &amp;&amp; i.second.back() - i.second[<span class="number">0</span>] &gt;= <span class="number">2</span>) <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>#524. Longest Word in Dictionary through Deleting My SubmissionsBack To Contest<br>User Accepted: 609<br>User Tried: 827<br>Total Accepted: 619<br>Total Submissions: 2039<br>Difficulty: Medium<br>Given a string and a string dictionary, find the longest string in the dictionary that can be formed by deleting some characters of the given string. If there are more than one possible results, return the longest word with the smallest lexicographical order. If there is no possible result, return the empty string.</p>
+<p>Example 1:<br>Input:<br>s = “abpcplea”, d = [“ale”,”apple”,”monkey”,”plea”]</p>
+<p>Output:<br>“apple”<br>Example 2:<br>Input:<br>s = “abpcplea”, d = [“a”,”b”,”c”]</p>
+<p>Output:<br>“a”<br>Note:<br>All the strings in the input will only contain lower-case letters.<br>The size of the dictionary won’t exceed 1,000.<br>The length of all the strings in the input won’t exceed 1,000.</p>
+<p>##题目：给定字符串s，和单词字典d，将s删除部分字母可构成d中的单词，求满足条件最长的单词，当单词长度相同时，返回字典序列最小的</p>
+<h2 id="算法分析-贪心"><a href="#算法分析-贪心" class="headerlink" title="算法分析: 贪心"></a>算法分析: 贪心</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">class Solution &#123;</div><div class="line">    bool check(string &amp;s, string &amp;word)&#123;</div><div class="line">        int pos = 0, len = s.size();</div><div class="line">        for(auto w : word)&#123;</div><div class="line">            while(pos &lt; len &amp;&amp; s[pos] != w) pos++;</div><div class="line">            if(pos == len) return false;</div><div class="line">            pos++;</div><div class="line">        &#125;</div><div class="line">        return true;</div><div class="line">    &#125;</div><div class="line">public:</div><div class="line">    string findLongestWord(string s, vector&lt;string&gt;&amp; d) &#123;</div><div class="line">        string res = &quot;&quot;;</div><div class="line">        for(auto word : d)&#123;</div><div class="line">            if((res == &quot;&quot; || res.size() &lt; word.size() || (res.size() == word.size() &amp;&amp; res &gt; word)) &amp;&amp; check(s, word))&#123;</div><div class="line">                res = word;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        return res;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法 leecode c++</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/02/26/leetcode周末算法/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-zoom与scale" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -310,13 +383,13 @@
 <li>结合符和通用匹配符特殊性为0000</li>
 <li>重要声明!important标志放在声明的最后面，重要声明与非重要声明发生冲突时永远是重要声明胜出</li>
 </ul>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span><span class="undefined"></span></div><div class="line">        #test&#123;</div><div class="line">            color: red;</div><div class="line">        &#125;</div><div class="line">        p[id="test"]&#123;</div><div class="line">            color: green;</div><div class="line">        &#125;</div><div class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">"test"</span>&gt;</span></div><div class="line">        id选择器与id属性选择器优先级不同</div><div class="line">        #test 0100</div><div class="line">        p[id="test"] 0011</div><div class="line">        最终呈现为红色</div><div class="line">    <span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span><span class="css"></span></div><div class="line">        <span class="selector-id">#test</span>&#123;</div><div class="line">            <span class="attribute">color</span>: red;</div><div class="line">        &#125;</div><div class="line">        <span class="selector-tag">p</span><span class="selector-attr">[id="test"]</span>&#123;</div><div class="line">            <span class="attribute">color</span>: green;</div><div class="line">        &#125;</div><div class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">"test"</span>&gt;</span></div><div class="line">        id选择器与id属性选择器优先级不同</div><div class="line">        #test 0100</div><div class="line">        p[id="test"] 0011</div><div class="line">        最终呈现为红色</div><div class="line">    <span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
 <p>#继承</p>
 <ul>
 <li>有些属性不能继承，外边距，内边距，背景和边框等</li>
 <li>继承的值无特殊性，tips：0000与没有特殊性是有差别的，因此当继承值与*比较时，通用匹配符胜出</li>
 </ul>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span><span class="undefined"></span></div><div class="line">        p&#123;</div><div class="line">            color: black;</div><div class="line">        &#125;</div><div class="line">        *&#123;</div><div class="line">            color: grey;</div><div class="line">        &#125;</div><div class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>black <span class="tag">&lt;<span class="name">em</span>&gt;</span>grey<span class="tag">&lt;/<span class="name">em</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span><span class="css"></span></div><div class="line">        <span class="selector-tag">p</span>&#123;</div><div class="line">            <span class="attribute">color</span>: black;</div><div class="line">        &#125;</div><div class="line">        *&#123;</div><div class="line">            <span class="attribute">color</span>: grey;</div><div class="line">        &#125;</div><div class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>black <span class="tag">&lt;<span class="name">em</span>&gt;</span>grey<span class="tag">&lt;/<span class="name">em</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
 <p>#层叠</p>
 <ul>
 <li>找出元素所有相关规则</li>
@@ -734,6 +807,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">算法 leecode c++</a>
               </li>
              
               <li class="article-tag-list-item">

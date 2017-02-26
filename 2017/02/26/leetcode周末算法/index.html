@@ -6,17 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="//happyeverday.github.io">
-  <title>Archives: 2017/2 | 行舟的博客</title>
+  <title>leetcode周末算法 | 行舟的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="北京邮电大学15级">
-<meta property="og:type" content="website">
-<meta property="og:title" content="行舟的博客">
-<meta property="og:url" content="//happyeverday.github.io/archives/2017/02/index.html">
+  <meta name="description" content="#523. Continuous Subarray Sum My SubmissionsBack To Contest
+#Difficulty: MediumGiven a list of non-negative numbers and a target integer k, write a function to check if the array has a continuous suba">
+<meta property="og:type" content="article">
+<meta property="og:title" content="leetcode周末算法">
+<meta property="og:url" content="//happyeverday.github.io/2017/02/26/leetcode周末算法/index.html">
 <meta property="og:site_name" content="行舟的博客">
-<meta property="og:description" content="北京邮电大学15级">
+<meta property="og:description" content="#523. Continuous Subarray Sum My SubmissionsBack To Contest
+#Difficulty: MediumGiven a list of non-negative numbers and a target integer k, write a function to check if the array has a continuous suba">
+<meta property="og:updated_time" content="2017-02-26T05:03:05.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="行舟的博客">
-<meta name="twitter:description" content="北京邮电大学15级">
+<meta name="twitter:title" content="leetcode周末算法">
+<meta name="twitter:description" content="#523. Continuous Subarray Sum My SubmissionsBack To Contest
+#Difficulty: MediumGiven a list of non-negative numbers and a target integer k, write a function to check if the array has a continuous suba">
   
     <link rel="alternative" href="/atom.xml" title="行舟的博客" type="application/atom+xml">
   
@@ -138,36 +142,46 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-leetcode周末算法" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/02/26/leetcode周末算法/" class="archive-article-date">
-  	<time datetime="2017-02-26T04:52:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-26</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/02/26/leetcode周末算法/">leetcode周末算法</a>
+    <h1 class="article-title" itemprop="name">
+      leetcode周末算法
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2017/02/26/leetcode周末算法/" class="archive-article-date">
+  	<time datetime="2017-02-26T04:52:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#523. Continuous Subarray Sum My SubmissionsBack To Contest</p>
+<p>#Difficulty: Medium<br>Given a list of non-negative numbers and a target integer k, write a function to check if the array has a continuous subarray of size at least 2 that sums up to the multiple of k, that is, sums up to n*k where n is also an integer.</p>
+<p>Example 1:<br>Input: [23, 2, 4, 6, 7],  k=6<br>Output: True<br>Explanation: Because [2, 4] is a continuous subarray of size 2 and sums up to 6.<br>Example 2:<br>Input: [23, 2, 6, 4, 7],  k=6<br>Output: True<br>Explanation: Because [23, 2, 6, 4, 7] is an continuous subarray of size 5 and sums up to 42.<br>Note:<br>The length of the array won’t exceed 10,000.<br>You may assume the sum of all the numbers is in the range of a signed 32-bit integer.</p>
+<p>##题目：给定一个数组nums,和一个整数k,求数组中是否存在子串之和能够整除k</p>
+<p>##算法分析：</p>
+<h3 id="利用从0到pos之和取余k的值作为标志，例如-0到2取余k值为3，0到5取余k值也为3，则说明3到5子串之和取余k为0"><a href="#利用从0到pos之和取余k的值作为标志，例如-0到2取余k值为3，0到5取余k值也为3，则说明3到5子串之和取余k为0" class="headerlink" title="利用从0到pos之和取余k的值作为标志，例如:0到2取余k值为3，0到5取余k值也为3，则说明3到5子串之和取余k为0"></a>利用从0到pos之和取余k的值作为标志，例如:0到2取余k值为3，0到5取余k值也为3，则说明3到5子串之和取余k为0</h3><h3 id="此外要将位置0加入子串数组中，因此需要首先将标识为0序列推入下表-1，这样当0～pos取余k为0，（pos-0-1）获取子串中元素个数，遍历才能拿到正确结果"><a href="#此外要将位置0加入子串数组中，因此需要首先将标识为0序列推入下表-1，这样当0～pos取余k为0，（pos-0-1）获取子串中元素个数，遍历才能拿到正确结果" class="headerlink" title="此外要将位置0加入子串数组中，因此需要首先将标识为0序列推入下表-1，这样当0～pos取余k为0，（pos - 0 + 1）获取子串中元素个数，遍历才能拿到正确结果"></a>此外要将位置0加入子串数组中，因此需要首先将标识为0序列推入下表-1，这样当0～pos取余k为0，（pos - 0 + 1）获取子串中元素个数，遍历才能拿到正确结果</h3><p>注意事项：对于参数k为0和负数的处理<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">checkSubarraySum</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> k)</span> </span>&#123;</div><div class="line">        <span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; m;</div><div class="line">        <span class="keyword">int</span> a = <span class="number">0</span>, len = nums.size();</div><div class="line">        <span class="keyword">if</span>(k == <span class="number">0</span>)&#123;</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>;i &lt; len;i++)&#123;</div><div class="line">                <span class="keyword">if</span>(nums[i] == <span class="number">0</span> &amp;&amp; nums[i - <span class="number">1</span>] == <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">        &#125;</div><div class="line">        k = k &gt; <span class="number">0</span> ? k : -k;</div><div class="line">        m[<span class="number">0</span>].push_back(<span class="number">-1</span>);</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; len;i++)&#123;</div><div class="line">            a = (a + nums[i]) % k;</div><div class="line">            m[a].push_back(i);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> i : m)&#123;</div><div class="line">            <span class="keyword">if</span>(i.second.size() &gt;= <span class="number">2</span> &amp;&amp; i.second.back() - i.second[<span class="number">0</span>] &gt;= <span class="number">2</span>) <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>#524. Longest Word in Dictionary through Deleting My SubmissionsBack To Contest<br>User Accepted: 609<br>User Tried: 827<br>Total Accepted: 619<br>Total Submissions: 2039<br>Difficulty: Medium<br>Given a string and a string dictionary, find the longest string in the dictionary that can be formed by deleting some characters of the given string. If there are more than one possible results, return the longest word with the smallest lexicographical order. If there is no possible result, return the empty string.</p>
+<p>Example 1:<br>Input:<br>s = “abpcplea”, d = [“ale”,”apple”,”monkey”,”plea”]</p>
+<p>Output:<br>“apple”<br>Example 2:<br>Input:<br>s = “abpcplea”, d = [“a”,”b”,”c”]</p>
+<p>Output:<br>“a”<br>Note:<br>All the strings in the input will only contain lower-case letters.<br>The size of the dictionary won’t exceed 1,000.<br>The length of all the strings in the input won’t exceed 1,000.</p>
+<p>##题目：给定字符串s，和单词字典d，将s删除部分字母可构成d中的单词，求满足条件最长的单词，当单词长度相同时，返回字典序列最小的</p>
+<h2 id="算法分析-贪心"><a href="#算法分析-贪心" class="headerlink" title="算法分析: 贪心"></a>算法分析: 贪心</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">class Solution &#123;</div><div class="line">    bool check(string &amp;s, string &amp;word)&#123;</div><div class="line">        int pos = 0, len = s.size();</div><div class="line">        for(auto w : word)&#123;</div><div class="line">            while(pos &lt; len &amp;&amp; s[pos] != w) pos++;</div><div class="line">            if(pos == len) return false;</div><div class="line">            pos++;</div><div class="line">        &#125;</div><div class="line">        return true;</div><div class="line">    &#125;</div><div class="line">public:</div><div class="line">    string findLongestWord(string s, vector&lt;string&gt;&amp; d) &#123;</div><div class="line">        string res = &quot;&quot;;</div><div class="line">        for(auto word : d)&#123;</div><div class="line">            if((res == &quot;&quot; || res.size() &lt; word.size() || (res.size() == word.size() &amp;&amp; res &gt; word)) &amp;&amp; check(s, word))&#123;</div><div class="line">                res = word;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        return res;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -179,57 +193,88 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://happyeverday.github.io/2017/02/26/leetcode周末算法/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/02/15/zoom与scale/" class="archive-article-date">
-  	<time datetime="2017-02-15T12:03:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-15</time>
-</a>
-        </div>
-    	 
+<nav id="article-nav">
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/02/15/zoom与scale/">zoom与scale</a>
-    </h1>
+  
+    <a href="/2017/02/15/zoom与scale/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">zoom与scale</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+  
+    <div class="duoshuo"></div>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">css3</a>
-        		</li>
-      		
-		</ul>
-	</div>
 
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -252,8 +297,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
