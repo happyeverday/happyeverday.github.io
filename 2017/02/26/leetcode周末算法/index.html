@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="行舟的博客">
 <meta property="og:description" content="#523. Continuous Subarray Sum My SubmissionsBack To Contest
 #Difficulty: MediumGiven a list of non-negative numbers and a target integer k, write a function to check if the array has a continuous suba">
-<meta property="og:updated_time" content="2017-02-26T05:03:05.000Z">
+<meta property="og:updated_time" content="2017-02-26T05:05:29.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="leetcode周末算法">
 <meta name="twitter:description" content="#523. Continuous Subarray Sum My SubmissionsBack To Contest
@@ -173,7 +173,7 @@
 <p>Output:<br>“apple”<br>Example 2:<br>Input:<br>s = “abpcplea”, d = [“a”,”b”,”c”]</p>
 <p>Output:<br>“a”<br>Note:<br>All the strings in the input will only contain lower-case letters.<br>The size of the dictionary won’t exceed 1,000.<br>The length of all the strings in the input won’t exceed 1,000.</p>
 <p>##题目：给定字符串s，和单词字典d，将s删除部分字母可构成d中的单词，求满足条件最长的单词，当单词长度相同时，返回字典序列最小的</p>
-<h2 id="算法分析-贪心"><a href="#算法分析-贪心" class="headerlink" title="算法分析: 贪心"></a>算法分析: 贪心</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">class Solution &#123;</div><div class="line">    bool check(string &amp;s, string &amp;word)&#123;</div><div class="line">        int pos = 0, len = s.size();</div><div class="line">        for(auto w : word)&#123;</div><div class="line">            while(pos &lt; len &amp;&amp; s[pos] != w) pos++;</div><div class="line">            if(pos == len) return false;</div><div class="line">            pos++;</div><div class="line">        &#125;</div><div class="line">        return true;</div><div class="line">    &#125;</div><div class="line">public:</div><div class="line">    string findLongestWord(string s, vector&lt;string&gt;&amp; d) &#123;</div><div class="line">        string res = &quot;&quot;;</div><div class="line">        for(auto word : d)&#123;</div><div class="line">            if((res == &quot;&quot; || res.size() &lt; word.size() || (res.size() == word.size() &amp;&amp; res &gt; word)) &amp;&amp; check(s, word))&#123;</div><div class="line">                res = word;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        return res;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="算法分析-贪心算法匹配s删除部分字符是否和单词匹配"><a href="#算法分析-贪心算法匹配s删除部分字符是否和单词匹配" class="headerlink" title="算法分析: 贪心算法匹配s删除部分字符是否和单词匹配"></a>算法分析: 贪心算法匹配s删除部分字符是否和单词匹配</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">class Solution &#123;</div><div class="line">    bool check(string &amp;s, string &amp;word)&#123;</div><div class="line">        int pos = 0, len = s.size();</div><div class="line">        for(auto w : word)&#123;</div><div class="line">            while(pos &lt; len &amp;&amp; s[pos] != w) pos++;</div><div class="line">            if(pos == len) return false;</div><div class="line">            pos++;</div><div class="line">        &#125;</div><div class="line">        return true;</div><div class="line">    &#125;</div><div class="line">public:</div><div class="line">    string findLongestWord(string s, vector&lt;string&gt;&amp; d) &#123;</div><div class="line">        string res = &quot;&quot;;</div><div class="line">        for(auto word : d)&#123;</div><div class="line">            if((res == &quot;&quot; || res.size() &lt; word.size() || (res.size() == word.size() &amp;&amp; res &gt; word)) &amp;&amp; check(s, word))&#123;</div><div class="line">                res = word;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        return res;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
 
       
 
@@ -370,19 +370,19 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">css3</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">算法 leecode c++</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color5">css3</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">
