@@ -140,6 +140,89 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-人人网FED-Chrome源码系列" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/02/27/人人网FED-Chrome源码系列/">人人网FED-Chrome源码系列学习笔记</a>
+    </h1>
+  
+
+        
+        <a href="/2017/02/27/人人网FED-Chrome源码系列/" class="archive-article-date">
+  	<time datetime="2017-02-27T06:19:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="从Chrome源码看浏览器如何构建DOM树"><a href="#从Chrome源码看浏览器如何构建DOM树" class="headerlink" title="从Chrome源码看浏览器如何构建DOM树"></a><a href="http://www.renfed.com/2017/01/30/chrome-build-dom/" target="_blank" rel="external">从Chrome源码看浏览器如何构建DOM树</a></h1><h2 id="1-加载：DocumentLoader这个类里面的startLoadingMainResource函数里去加载url返回的数据，如访问一个网站则返回html文本，每次接收到数据触发DocumentLoader的dataReceived函数，内部调用commitData展开业务逻辑"><a href="#1-加载：DocumentLoader这个类里面的startLoadingMainResource函数里去加载url返回的数据，如访问一个网站则返回html文本，每次接收到数据触发DocumentLoader的dataReceived函数，内部调用commitData展开业务逻辑" class="headerlink" title="1.加载：DocumentLoader这个类里面的startLoadingMainResource函数里去加载url返回的数据，如访问一个网站则返回html文本，每次接收到数据触发DocumentLoader的dataReceived函数，内部调用commitData展开业务逻辑"></a>1.加载：DocumentLoader这个类里面的startLoadingMainResource函数里去加载url返回的数据，如访问一个网站则返回html文本，每次接收到数据触发DocumentLoader的dataReceived函数，内部调用commitData展开业务逻辑</h2><h2 id="2-解析：commitData调用HTMLDocumentParser-Parser-，并实例化document对象（Parse和document对象利用单例模式只初始化一次），每当收到数据启动一个线程执行Parse任务，解析模块的输出时tokens"><a href="#2-解析：commitData调用HTMLDocumentParser-Parser-，并实例化document对象（Parse和document对象利用单例模式只初始化一次），每当收到数据启动一个线程执行Parse任务，解析模块的输出时tokens" class="headerlink" title="2.解析：commitData调用HTMLDocumentParser (Parser)，并实例化document对象（Parse和document对象利用单例模式只初始化一次），每当收到数据启动一个线程执行Parse任务，解析模块的输出时tokens"></a>2.解析：commitData调用HTMLDocumentParser (Parser)，并实例化document对象（Parse和document对象利用单例模式只初始化一次），每当收到数据启动一个线程执行Parse任务，解析模块的输出时tokens</h2><h3 id="tokens格式"><a href="#tokens格式" class="headerlink" title="tokens格式"></a>tokens格式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">tagName: html  |type: DOCTYPE   |attr:              |text: &quot;</div><div class="line">tagName:       |type: Character |attr:              |text: \n&quot;</div><div class="line">tagName: html  |type: startTag  |attr:              |text: &quot;</div><div class="line">tagName:       |type: Character |attr:              |text: \n&quot;</div><div class="line">tagName: head  |type: startTag  |attr:              |text: &quot;</div><div class="line">tagName:       |type: Character |attr:              |text: \n    &quot;</div><div class="line">tagName: meta  |type: startTag  |attr:charset=utf-8 |text: &quot;</div><div class="line">tagName:       |type: Character |attr:              |text: \n&quot;</div><div class="line">tagName: head  |type: EndTag    |attr:              |text: &quot;</div><div class="line">tagName:       |type: Character |attr:              |text: \n&quot;</div><div class="line">tagName: body  |type: startTag  |attr:              |text: &quot;</div><div class="line">tagName:       |type: Character |attr:              |text: \n    &quot;</div><div class="line">tagName: div   |type: startTag  |attr:              |text: &quot;</div><div class="line">tagName:       |type: Character |attr:              |text: \n        &quot;</div><div class="line">tagName: h1    |type: startTag  |attr:class=title   |text: &quot;</div><div class="line">tagName:       |type: Character |attr:              |text: demo&quot;</div><div class="line">tagName: h1    |type: EndTag    |attr:              |text: &quot;</div><div class="line">tagName:       |type: Character |attr:              |text: \n        &quot;</div><div class="line">tagName: input |type: startTag  |attr:value=hello   |text: &quot;</div><div class="line">tagName:       |type: Character |attr:              |text: \n    &quot;</div><div class="line">tagName: div   |type: EndTag    |attr:              |text: &quot;</div><div class="line">tagName:       |type: Character |attr:              |text:     \n&quot;</div><div class="line">tagName: body  |type: EndTag    |attr:              |text: &quot;</div><div class="line">tagName:       |type: Character |attr:              |text: \n&quot;</div><div class="line">tagName: html  |type: EndTag    |attr:              |text: &quot;</div><div class="line">tagName:       |type: Character |attr:              |text: \n&quot;</div><div class="line">tagName:       |type: EndOfFile |attr:              |text: &quot;</div></pre></td></tr></table></figure>
+<h3 id="Chrome-7种类型标签"><a href="#Chrome-7种类型标签" class="headerlink" title="Chrome 7种类型标签"></a>Chrome 7种类型标签</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">enum TokenType &#123;</div><div class="line">   Uninitialized,</div><div class="line">   DOCTYPE,</div><div class="line">   StartTag,</div><div class="line">   EndTag,</div><div class="line">   Comment,</div><div class="line">   Character,</div><div class="line">   EndOfFile,</div><div class="line"> &#125;;</div></pre></td></tr></table></figure>
+<h2 id="3-构建DOM：主要任务是确立元素之间的父子关系"><a href="#3-构建DOM：主要任务是确立元素之间的父子关系" class="headerlink" title="3.构建DOM：主要任务是确立元素之间的父子关系"></a>3.构建DOM：主要任务是确立元素之间的父子关系</h2><h3 id="根据不同的标签类型做相应的处理"><a href="#根据不同的标签类型做相应的处理" class="headerlink" title="根据不同的标签类型做相应的处理"></a>根据不同的标签类型做相应的处理</h3><ul>
+<li>处理DOCTYPE标签确定文档的渲染模型，标准模式，怪异模式，受限怪异模式</li>
+<li>处理开标签StartTag，利用堆栈，后进先出，当前处理的元素和栈顶元素的子元素</li>
+<li>处理关闭标签EndTag，出栈操作</li>
+<li>自定义标签的处理，实例化为HTMLUnknownElement，也可以注册为Customer Elements<h2 id="4-查找DOM"><a href="#4-查找DOM" class="headerlink" title="4.查找DOM"></a>4.查找DOM</h2><h3 id="ID查找，哈希表存储"><a href="#ID查找，哈希表存储" class="headerlink" title="ID查找，哈希表存储"></a>ID查找，哈希表存储</h3><h3 id="类选择器，ClassCollection，延迟执行"><a href="#类选择器，ClassCollection，延迟执行" class="headerlink" title="类选择器，ClassCollection，延迟执行"></a>类选择器，ClassCollection，延迟执行</h3><h3 id="querySelector"><a href="#querySelector" class="headerlink" title="querySelector"></a>querySelector</h3></li>
+</ul>
+<h1 id="从Chrome源码看浏览器如何计算CSS"><a href="#从Chrome源码看浏览器如何计算CSS" class="headerlink" title="从Chrome源码看浏览器如何计算CSS"></a><a href="http://www.renfed.com/2017/02/22/chrome-css/" target="_blank" rel="external">从Chrome源码看浏览器如何计算CSS</a></h1><h2 id="1-解析："><a href="#1-解析：" class="headerlink" title="1.解析："></a>1.解析：</h2><h3 id="字符串解析成token"><a href="#字符串解析成token" class="headerlink" title="字符串解析成token"></a>字符串解析成token</h3><h3 id="token转化为styleRule样式规则，选择器-属性集合"><a href="#token转化为styleRule样式规则，选择器-属性集合" class="headerlink" title="token转化为styleRule样式规则，选择器+属性集合"></a>token转化为styleRule样式规则，选择器+属性集合</h3><p>选择器类型<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">enum MatchType &#123;</div><div class="line">  Unknown,</div><div class="line">  Tag,               // Example: div</div><div class="line">  Id,                // Example: #id</div><div class="line">  Class,             // example: .class</div><div class="line">  PseudoClass,       // Example:  :nth-child(2)</div><div class="line">  PseudoElement,     // Example: ::first-line</div><div class="line">  PagePseudoClass,   // ??</div><div class="line">  AttributeExact,    // Example: E[foo=&quot;bar&quot;]</div><div class="line">  AttributeSet,      // Example: E[foo]</div><div class="line">  AttributeHyphen,   // Example: E[foo|=&quot;bar&quot;]</div><div class="line">  AttributeList,     // Example: E[foo~=&quot;bar&quot;]</div><div class="line">  AttributeContain,  // css3: E[foo*=&quot;bar&quot;]</div><div class="line">  AttributeBegin,    // css3: E[foo^=&quot;bar&quot;]</div><div class="line">  AttributeEnd,      // css3: E[foo$=&quot;bar&quot;]</div><div class="line">  FirstAttributeSelectorMatch = AttributeExact,</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>关系类型<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">enum RelationType &#123;</div><div class="line">  SubSelector,       // No combinator</div><div class="line">  Descendant,        // &quot;Space&quot; combinator,后代关系</div><div class="line">  Child,             // &gt; combinator,父子关系</div><div class="line">  DirectAdjacent,    // + combinator，直接相邻关系</div><div class="line">  IndirectAdjacent,  // ~ combinator,非直接相邻关系</div><div class="line">  // Special cases for shadow DOM related selectors.</div><div class="line">  ShadowPiercingDescendant,  // &gt;&gt;&gt; combinator</div><div class="line">  ShadowDeep,                // /deep/ combinator</div><div class="line">  ShadowPseudo,              // ::shadow pseudo element</div><div class="line">  ShadowSlot                 // ::slotted() pseudo element</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<h3 id="生成四种类型的哈希map"><a href="#生成四种类型的哈希map" class="headerlink" title="生成四种类型的哈希map"></a>生成四种类型的哈希map</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">CompactRuleMap m_idRules;</div><div class="line">CompactRuleMap m_classRules;</div><div class="line">CompactRuleMap m_tagRules;</div><div class="line">CompactRuleMap m_shadowPseudoElementRules;</div></pre></td></tr></table></figure>
+<h2 id="2-计算css"><a href="#2-计算css" class="headerlink" title="2.计算css"></a>2.计算css</h2><h3 id="命中判断，深度优先遍历，按照id，类，伪元素，标签，通用匹配符的顺序取出selector进行判断，从右向左递归进行"><a href="#命中判断，深度优先遍历，按照id，类，伪元素，标签，通用匹配符的顺序取出selector进行判断，从右向左递归进行" class="headerlink" title="命中判断，深度优先遍历，按照id，类，伪元素，标签，通用匹配符的顺序取出selector进行判断，从右向左递归进行"></a>命中判断，深度优先遍历，按照id，类，伪元素，标签，通用匹配符的顺序取出selector进行判断，从右向左递归进行</h3><h3 id="设置style，继承，UA样式，用户样式，同时计算样式优先级，css层叠的概念，优先级相同比较两者位置，靠后获胜，"><a href="#设置style，继承，UA样式，用户样式，同时计算样式优先级，css层叠的概念，优先级相同比较两者位置，靠后获胜，" class="headerlink" title="设置style，继承，UA样式，用户样式，同时计算样式优先级，css层叠的概念，优先级相同比较两者位置，靠后获胜，"></a>设置style，继承，UA样式，用户样式，同时计算样式优先级，css层叠的概念，优先级相同比较两者位置，靠后获胜，</h3><h3 id="调整style，绝对定位元素，浮动元素，表格等display和position等属性进行调整"><a href="#调整style，绝对定位元素，浮动元素，表格等display和position等属性进行调整" class="headerlink" title="调整style，绝对定位元素，浮动元素，表格等display和position等属性进行调整"></a>调整style，绝对定位元素，浮动元素，表格等display和position等属性进行调整</h3><h1 id="从Chrome源码看浏览器如何layout布局"><a href="#从Chrome源码看浏览器如何layout布局" class="headerlink" title="从Chrome源码看浏览器如何layout布局"></a><a href="http://www.renfed.com/2017/02/26/chrome-layout/" target="_blank" rel="external">从Chrome源码看浏览器如何layout布局</a></h1><h2 id="1-利用元素之间的父子关系构建layout-Tree"><a href="#1-利用元素之间的父子关系构建layout-Tree" class="headerlink" title="1.利用元素之间的父子关系构建layout Tree"></a>1.利用元素之间的父子关系构建layout Tree</h2><h2 id="2-根绝style计算Layout的值，一些盒模型数据等，先计算父元素，将其传给子元素后在判断父元素是否进行更新（css-margin-top相对于父元素宽度进行设置的原因，避免循环计算，在父子之间绕啊绕）"><a href="#2-根绝style计算Layout的值，一些盒模型数据等，先计算父元素，将其传给子元素后在判断父元素是否进行更新（css-margin-top相对于父元素宽度进行设置的原因，避免循环计算，在父子之间绕啊绕）" class="headerlink" title="2.根绝style计算Layout的值，一些盒模型数据等，先计算父元素，将其传给子元素后在判断父元素是否进行更新（css margin-top相对于父元素宽度进行设置的原因，避免循环计算，在父子之间绕啊绕）"></a>2.根绝style计算Layout的值，一些盒模型数据等，先计算父元素，将其传给子元素后在判断父元素是否进行更新（css margin-top相对于父元素宽度进行设置的原因，避免循环计算，在父子之间绕啊绕）</h2><h1 id="3-绘制Paint，会调用最上面说的Skia的SkCanvas画"><a href="#3-绘制Paint，会调用最上面说的Skia的SkCanvas画" class="headerlink" title="3.绘制Paint，会调用最上面说的Skia的SkCanvas画"></a>3.绘制Paint，会调用最上面说的Skia的SkCanvas画</h1><h1 id="4-layout的触发条件"><a href="#4-layout的触发条件" class="headerlink" title="4.layout的触发条件"></a>4.layout的触发条件</h1><ul>
+<li>html解析完成</li>
+<li>css解析完成</li>
+<li>resize页面</li>
+<li>获取一些属性值，getComputedStyle, clientWidth等</li>
+<li>改变width，height等值</li>
+</ul>
+<h1 id="从Chrome源码看浏览器的事件机制"><a href="#从Chrome源码看浏览器的事件机制" class="headerlink" title="从Chrome源码看浏览器的事件机制"></a><a href="http://www.renfed.com/2017/02/05/browser-event/" target="_blank" rel="external">从Chrome源码看浏览器的事件机制</a></h1><ul>
+<li>DOMContentLoaded：当html解析遇到EndOfFile标志</li>
+<li>事件捕获，冒泡，触发等</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">浏览器</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/02/27/人人网FED-Chrome源码系列/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-leetcode周末算法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -801,6 +884,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">浏览器</a>
               </li>
              
               <li class="article-tag-list-item">
